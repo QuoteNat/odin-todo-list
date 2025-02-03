@@ -23,8 +23,8 @@ class Todo {
  * Project class that stores a list of Todos
  */
 class Project {
-    name = "";
-    todos = [];
+    #name = "";
+    #todos = [];
 
     /**
      * Construct a new empty project
@@ -33,6 +33,21 @@ class Project {
     constructor (name) {
         this.name = name;
     }
+
+    addTodo (title, description, dueDate, priority) {
+        this.#todos.push(new Todo(title, description, dueDate, priority));
+    }
+
+    deleteTodo (index) {
+        this.#todos.splice(index, 1);
+    }
 }
 
-export { Todo, Project };
+/**
+ * App class that stores and manages app logic and data. Returns data to be used for displaying the frontend.
+ */
+class App {
+    #projects = [];
+}
+
+export default App;
