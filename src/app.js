@@ -23,8 +23,8 @@ class Todo {
  * Project class that stores a list of Todos
  */
 class Project {
-    #name = "";
-    #todos = [];
+    name = "";
+    todos = [];
 
     /**
      * Construct a new empty project
@@ -35,11 +35,13 @@ class Project {
     }
 
     addTodo (title, description, dueDate, priority) {
-        this.#todos.push(new Todo(title, description, dueDate, priority));
+        this.todos.push(new Todo(title, description, dueDate, priority));
+        console.log("test");
+        console.log(this.todos)
     }
 
     deleteTodo (index) {
-        this.#todos.splice(index, 1);
+        this.todos.splice(index, 1);
     }
 }
 
