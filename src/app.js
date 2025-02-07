@@ -54,6 +54,32 @@ class Project {
     getTodo (index) {
         return this.todos[index];
     }
+
+    /**
+     * Edit a todo at an index.
+     * 
+     * If a given parameter is null, no changes will be made to that value.
+     * @param {*} index 
+     * @param {*} title 
+     * @param {*} description 
+     * @param {*} dueDate 
+     * @param {*} priority 
+     */
+    editTodo (index, title, description, dueDate, priority) {
+        let todo = this.getTodo(index);
+        if (title != null) {
+            todo.title = title;
+        }
+        if (description != null) {
+            todo.description = description;
+        }
+        if (dueDate != null) {
+            todo.dueDate = dueDate;
+        }
+        if (priority != null) {
+            todo.priority = priority;
+        }
+    }
 }
 
 /**
@@ -62,11 +88,12 @@ class Project {
 class App {
     #projects = [];
     constructor () {
-        this.#projects.push(new Project("Inbox"));
-        this.#projects[0].addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
-        let todo = this.#projects[0].getTodo(0);
+        let inbox = new Project("Inbox");
+        inbox.addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
+        let todo = inbox.getTodo(0);
         todo.toggleDone();
-
+        inbox.editTodo(0, "Example but i edited it!", null, null, null)
+        this.#projects.push(inbox);
     }
 
     getProjectState(i) {
