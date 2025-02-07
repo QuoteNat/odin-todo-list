@@ -6,7 +6,7 @@ class Todo {
     description = "";
     dueDate = new Date();
     priority = 0;
-    done = false;
+    #done = false;
     /**
      * Creates a new Todo object
      * @param {string} title 
@@ -16,6 +16,13 @@ class Todo {
      */
     constructor (title, description, dueDate, priority) {
         Object.assign(this, { title, description, dueDate, priority });
+    }
+
+    /**
+     * Toggles the completion state of the todo
+     */
+    toggleDone() {
+        this.#done = !this.#done;
     }
 }
 
@@ -43,6 +50,10 @@ class Project {
     deleteTodo (index) {
         this.todos.splice(index, 1);
     }
+
+    getTodo (index) {
+        return this.todos[index];
+    }
 }
 
 /**
@@ -53,7 +64,10 @@ class App {
     constructor () {
         this.#projects.push(new Project("Inbox"));
         this.#projects[0].addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
-    };
+        let todo = this.#projects[0].getTodo(0);
+        todo.toggleDone();
+
+    }
 
     getProjectState(i) {
         let name = this.#projects[i].name;
