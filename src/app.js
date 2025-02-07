@@ -41,22 +41,6 @@ class Project {
     deleteTodo (index) {
         this.#todos.splice(index, 1);
     }
-
-    /**
-     * Returns project name
-     */
-    get name() {
-        return this.#name;
-    }
-
-    /**
-     * Returns a closure containing the current list of todos in a project
-     */
-    get todos() {
-        return {
-            todos: this.#todos
-        };
-    }
 }
 
 /**
@@ -64,12 +48,21 @@ class Project {
  */
 class App {
     #projects = [];
-    constructor () {};
+    constructor () {
+        this.#projects.push(new Project("Inbox"));
+        this.#projects[0].addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
+    };
 
     getProjectState(i) {
         let name = this.#projects[i].name;
         let todos = this.#projects[i].todos;
         return {name, todos};
+    }
+
+    getProjectList() {
+        return this.#projects.map((project) => {
+            return project.name;
+        });
     }
 }
 
