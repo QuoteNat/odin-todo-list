@@ -22,6 +22,9 @@ function updateDisplay(app) {
         projectTag.textContent = project;
         navigationList.appendChild(projectTag);
     }
+    const newProject = document.createElement("button");
+    newProject.textContent = "+ Create project";
+    navigationList.appendChild(newProject);
 
     let projectTodos = app.getProjectState(currentProject);
     console.log(projectTodos.todos);
@@ -40,6 +43,10 @@ function updateDisplay(app) {
         todoDiv.appendChild(date);
         todolistDiv.appendChild(todoDiv);
     }
+
+    const newTask = document.createElement("button");
+    newTask.textContent = "+ Create task";
+    todolistDiv.appendChild(newTask);
 }
 
 let app = new App();
