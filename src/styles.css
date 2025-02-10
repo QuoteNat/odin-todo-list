@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    width: 99%;
+    height: 99%;
+}
+
+#navigation-list {
+    flex-direction: column;
+    flex-basis: 20%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+}
+
+#todos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+    margin: 5px;
+}
+.todo {
+    display: flex;
+    gap: 1%;
+    width: 100%;
+    flex-direction: row;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
