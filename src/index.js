@@ -25,10 +25,15 @@ function updateDisplay(app) {
 
     let projects = app.getProjectList();
     console.log(projects);
-    for (const project of projects) {
-        console.log(project);
+    for (let i = 0; i < projects.length; i++) {
+        console.log(projects[i]);
         const projectTag = document.createElement("p");
-        projectTag.textContent = project;
+        projectTag.textContent = projects[i];
+        projectTag.addEventListener("click", (counter) => {
+            currentProject = i;
+            console.log(currentProject)
+            updateDisplay(app);
+        })
         navigationList.appendChild(projectTag);
     }
     const newProject = document.createElement("button");
