@@ -143,6 +143,10 @@ class App {
     addProject(name) {
         return this.#projects.push(new Project(name)) - 1
     }
+
+    deleteTodo(project, todo) {
+        this.#projects[project].deleteTodo(todo);
+    }
 }
 
 export default App;

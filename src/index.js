@@ -52,10 +52,17 @@ function updateDisplay(app) {
         name.textContent = todo.title;
         const date = document.createElement("p");
         date.textContent = format(todo.dueDate, "MM/dd/yyyy")
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.addEventListener("click", () => {
+            app.deleteTodo(currentProject, j-1);
+            updateDisplay(app);
+        });
 
         todoDiv.appendChild(checkbox);
         todoDiv.appendChild(name);
         todoDiv.appendChild(date);
+        todoDiv.appendChild(deleteButton);
         todolistDiv.appendChild(todoDiv);
         j++;
     }
