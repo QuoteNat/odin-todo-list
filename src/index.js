@@ -6,7 +6,6 @@ let currentProject = 0;
 
 
 function addProject() {
-    console.log(currentProject)
     let projectName = window.prompt("What do you want your new project to be called?")
     currentProject = app.addProject(projectName)
     // Assume the user wants to switch to the newly created project
@@ -24,14 +23,11 @@ function updateDisplay(app) {
     todolistDiv.textContent = "";
 
     let projects = app.getProjectList();
-    console.log(projects);
     for (let i = 0; i < projects.length; i++) {
-        console.log(projects[i]);
         const projectTag = document.createElement("p");
         projectTag.textContent = projects[i];
         projectTag.addEventListener("click", (counter) => {
             currentProject = i;
-            console.log(currentProject)
             updateDisplay(app);
         })
         navigationList.appendChild(projectTag);
@@ -42,7 +38,6 @@ function updateDisplay(app) {
     navigationList.appendChild(newProject);
 
     let projectTodos = app.getProjectState(currentProject);
-    console.log(projectTodos.todos);
     let j = -1; // I don't know why this needs to be -1 when the j++ is at the end of the loop
     for (const todo of projectTodos.todos) {
         const todoDiv = document.createElement("div");

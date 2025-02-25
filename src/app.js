@@ -50,8 +50,6 @@ class Project {
 
     addTodo (title, description, dueDate, priority) {
         this.todos.push(new Todo(title, description, dueDate, priority));
-        console.log("test");
-        console.log(this.todos)
     }
 
     deleteTodo (index) {
