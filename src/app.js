@@ -6,7 +6,7 @@ class Todo {
     description = "";
     dueDate = new Date();
     priority = 0;
-    #done = false;
+    done = false;
     /**
      * Creates a new Todo object
      * @param {string} title 
@@ -22,7 +22,14 @@ class Todo {
      * Toggles the completion state of the todo
      */
     toggleDone() {
-        this.#done = !this.#done;
+        this.done = !this.done;
+    }
+
+    /**
+     * 
+     */
+    getDone() {
+        return this.done;
     }
 }
 
@@ -108,6 +115,24 @@ class App {
         });
     }
 
+    /**
+     * Toggle the completion status of a todo
+     * @param {int} project The index of the project
+     * @param {int} todo The index of the todo
+     */
+    toggleDone(project, todo) {
+        this.#projects[project].todos[todo].toggleDone()
+    }
+
+    /**
+     * Get the completion status of a todo
+     * @param {int} project The index of the project
+     * @param {int} todo The index of the todo
+     * @returns Completion status of the todo
+     */
+    getDone(project, todo) {
+        return this.#projects[project].todos[todo].done
+    }
     /**
      * Add a new project to the app
      * @param {string} name Name of the new project

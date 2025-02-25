@@ -15,7 +15,7 @@ function addProject() {
 
 /**
  * Updates the DOM to reflect the app state
- * @param {*} app 
+ * @param {App} app 
  */
 function updateDisplay(app) {
     const navigationList = document.getElementById("navigation-list");
@@ -43,11 +43,16 @@ function updateDisplay(app) {
 
     let projectTodos = app.getProjectState(currentProject);
     console.log(projectTodos.todos);
+    let j = -1; // I don't know why this needs to be -1 when the j++ is at the end of the loop
     for (const todo of projectTodos.todos) {
         const todoDiv = document.createElement("div");
         todoDiv.className = "todo";
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.addEventListener("input", (_event) => {
+            app.toggleDone(currentProject, j);
+            console.log(app.getProjectState(currentProject).todos);
+        });
         const name = document.createElement("p");
         name.textContent = todo.title;
         const date = document.createElement("p");
@@ -57,6 +62,7 @@ function updateDisplay(app) {
         todoDiv.appendChild(name);
         todoDiv.appendChild(date);
         todolistDiv.appendChild(todoDiv);
+        j++;
     }
 
     const newTask = document.createElement("button");
