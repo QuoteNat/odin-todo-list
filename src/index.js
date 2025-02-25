@@ -38,15 +38,15 @@ function updateDisplay(app) {
     navigationList.appendChild(newProject);
 
     let projectTodos = app.getProjectState(currentProject);
-    let j = -1; // I don't know why this needs to be -1 when the j++ is at the end of the loop
+    let j = 0; 
     for (const todo of projectTodos.todos) {
         const todoDiv = document.createElement("div");
         todoDiv.className = "todo";
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.checked = app.getProjectState(currentProject).todos[j+1].getDone()
+        checkbox.checked = app.getProjectState(currentProject).todos[j].getDone()
         checkbox.addEventListener("input", (_event) => {
-            app.toggleDone(currentProject, j);
+            app.toggleDone(currentProject, j-1); // The -1 is necessary no I don't know why
         });
         const name = document.createElement("p");
         name.textContent = todo.title;
