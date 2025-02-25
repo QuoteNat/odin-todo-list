@@ -14,8 +14,13 @@ class Todo {
      * @param {Date} dueDate 
      * @param {Number} priority 
      */
-    constructor (title, description, dueDate, priority) {
-        Object.assign(this, { title, description, dueDate, priority });
+    constructor (title, description, dueDate, priority, done) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.done = done;
+
     }
 
     /**
@@ -49,7 +54,7 @@ class Project {
     }
 
     addTodo (title, description, dueDate, priority) {
-        this.todos.push(new Todo(title, description, dueDate, priority));
+        this.todos.push(new Todo(title, description, dueDate, priority, false));
     }
 
     deleteTodo (index) {
@@ -96,7 +101,6 @@ class App {
         let inbox = new Project("Inbox");
         inbox.addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
         let todo = inbox.getTodo(0);
-        todo.toggleDone();
         inbox.editTodo(0, "Example but i edited it!", null, null, null)
         this.#projects.push(inbox);
     }

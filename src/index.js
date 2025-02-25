@@ -44,9 +44,9 @@ function updateDisplay(app) {
         todoDiv.className = "todo";
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.checked = app.getProjectState(currentProject).todos[j+1].getDone()
         checkbox.addEventListener("input", (_event) => {
             app.toggleDone(currentProject, j);
-            console.log(app.getProjectState(currentProject).todos);
         });
         const name = document.createElement("p");
         name.textContent = todo.title;
