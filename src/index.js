@@ -26,11 +26,14 @@ function todoForm(app, todoDiv, todoIndex) {
     const titleField = document.createElement("input");
     titleField.type = "text";
     titleField.placeholder = "Title";
+    titleField.value = todo.title;
     const descriptionField = document.createElement("input");
     descriptionField.type = "text";
     descriptionField.placeholder = "Description";
+    descriptionField.value = todo.description;
     const dateField = document.createElement("input");
     dateField.type = "date";
+    dateField.value = format(todo.dueDate, "yyyy-MM-dd");
     const submit = document.createElement("button");
     submit.textContent = "Save";
 
