@@ -5,11 +5,11 @@ import { format } from 'date-fns';
 let currentProject = 0;
 
 
-function addProject() {
-    let projectName = window.prompt("What do you want your new project to be called?")
-    currentProject = app.addProject(projectName)
+function addProject(app) {
+    let projectName = window.prompt("What do you want your new project to be called?");
+    currentProject = app.addProject(projectName);
     // Assume the user wants to switch to the newly created project
-    updateDisplay(app)
+    updateDisplay(app);
 }
 
 /**
@@ -45,7 +45,7 @@ function updateDisplay(app) {
     }
     const newProject = document.createElement("button");
     newProject.textContent = "+ Create project";
-    newProject.addEventListener("click", addProject)
+    newProject.addEventListener("click", () => {addProject(app);})
     navigationList.appendChild(newProject);
 
     let projectTodos = app.getProjectState(currentProject);
