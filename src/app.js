@@ -178,10 +178,9 @@ class App {
     /**
      * Add a new project to the app
      * @param {string} name Name of the new project
-     * @returns The index of the new project
      */
     addProject(name) {
-        return this.#projects.push(new Project(name)) - 1;
+        this.#projects.push(new Project(name)) - 1;
         this.saveToLocalStorage();
     }
 
