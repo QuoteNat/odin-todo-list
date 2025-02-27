@@ -21,6 +21,23 @@ function addProject(app) {
 function todoForm(app, todoDiv, todoIndex) {
     let todo = app.getProjectState(currentProject).todos[todoIndex];
     console.log(todo);
+    todoDiv.textContent = "";
+    // const form = document.createElement("form");
+    const titleField = document.createElement("input");
+    titleField.type = "text";
+    titleField.placeholder = "Title";
+    const descriptionField = document.createElement("input");
+    descriptionField.type = "text";
+    descriptionField.placeholder = "Description";
+    const dateField = document.createElement("input");
+    dateField.type = "date";
+    const submit = document.createElement("button");
+    submit.textContent = "Save";
+
+    todoDiv.appendChild(titleField);
+    todoDiv.appendChild(descriptionField);
+    todoDiv.appendChild(dateField);
+    todoDiv.appendChild(submit);
 }
 
 /**
