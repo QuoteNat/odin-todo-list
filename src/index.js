@@ -20,7 +20,6 @@ function addProject(app) {
  */
 function todoForm(app, todoDiv, todoIndex) {
     let todo = app.getProjectState(currentProject).todos[todoIndex];
-    console.log(todo);
     todoDiv.textContent = "";
     // const form = document.createElement("form");
     const titleField = document.createElement("input");
@@ -107,6 +106,15 @@ function updateDisplay(app) {
 
     const newTask = document.createElement("button");
     newTask.textContent = "+ Create task";
+    newTask.addEventListener("click", (event) => {
+        event.target.style.display = "none";
+        const todoDiv = document.createElement("div");
+        todoDiv.className = "todo";
+        app.addTodo(currentProject, "", "", new Date());
+        todoForm(app, todoDiv, app.getProjectState(currentProject).todos.length-1);
+        todolistDiv.appendChild(todoDiv);
+
+    })
     todolistDiv.appendChild(newTask);
 }
 

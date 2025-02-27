@@ -151,6 +151,10 @@ class App {
     editTodo(project, todoIndex, title, description, date) {
         this.#projects[project].editTodo(todoIndex, title, description, date, null);
     }
+
+    addTodo(project, title, description, date) {
+        this.#projects[project].addTodo(title, description, date, 0);
+    }
 }
 
 export default App;
