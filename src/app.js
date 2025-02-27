@@ -93,6 +93,32 @@ class Project {
 }
 
 /**
+ * Tests whether localStorage or sessionStorage apis are available
+ * from https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#feature-detecting_localstorage
+ * @param {string} type 
+ * @returns 
+ */
+function storageAvailable(type) {
+    let storage;
+    try {
+      storage = window[type];
+      const x = "__storage_test__";
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return (
+        e instanceof DOMException &&
+        e.name === "QuotaExceededError" &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        storage &&
+        storage.length !== 0
+      );
+    }
+  }
+  
+
+/**
  * App class that stores and manages app logic and data. Returns data to be used for displaying the frontend.
  */
 class App {
@@ -100,9 +126,22 @@ class App {
     constructor () {
         let inbox = new Project("Inbox");
         inbox.addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
-        let todo = inbox.getTodo(0);
-        inbox.editTodo(0, "Example but i edited it!", null, null, null)
         this.#projects.push(inbox);
+        console.log(localStorage.getItem("projects"));
+    }
+
+    saveToLocalStorage() {
+        if (storageAvailable("localStorage")) {
+            let projects = this.getProjectList();
+            for (let i = 0; i < projects.length; i++) {
+                projects[i] = this.getProjectState(i);
+            }
+            console.log(projects);
+            localStorage.setItem("projects", JSON.stringify(projects));
+            console.log(localStorage.getItem("projects"));
+        } else {
+            console.log("Local storage unavailable");
+        }
     }
 
     getProjectState(i) {
@@ -123,7 +162,8 @@ class App {
      * @param {int} todo The index of the todo
      */
     toggleDone(project, todo) {
-        this.#projects[project].todos[todo].toggleDone()
+        this.#projects[project].todos[todo].toggleDone();
+        this.saveToLocalStorage();
     }
 
     /**
@@ -141,19 +181,23 @@ class App {
      * @returns The index of the new project
      */
     addProject(name) {
-        return this.#projects.push(new Project(name)) - 1
+        return this.#projects.push(new Project(name)) - 1;
+        this.saveToLocalStorage();
     }
 
     deleteTodo(project, todo) {
         this.#projects[project].deleteTodo(todo);
+        this.saveToLocalStorage();
     }
 
     editTodo(project, todoIndex, title, description, date) {
         this.#projects[project].editTodo(todoIndex, title, description, date, null);
+        this.saveToLocalStorage();
     }
 
     addTodo(project, title, description, date) {
         this.#projects[project].addTodo(title, description, date, 0);
+        this.saveToLocalStorage();
     }
 }
 
