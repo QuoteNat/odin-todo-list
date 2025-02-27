@@ -13,6 +13,17 @@ function addProject() {
 }
 
 /**
+ * Generates the form for creating/editing a todo
+ * @param {App} app The app object
+ * @param {HTMLElement} todoDiv The frontend div of the todo being created/edited
+ * @param {int} todoIndex The index of the todo
+ */
+function todoForm(app, todoDiv, todoIndex) {
+    let todo = app.getProjectState(currentProject).todos[todoIndex];
+    console.log(todo);
+}
+
+/**
  * Updates the DOM to reflect the app state
  * @param {App} app 
  */
@@ -50,6 +61,9 @@ function updateDisplay(app) {
         });
         const name = document.createElement("p");
         name.textContent = todo.title;
+        name.addEventListener("click", () => {
+            todoForm(app, todoDiv, j-1);
+        });
         const date = document.createElement("p");
         date.textContent = format(todo.dueDate, "MM/dd/yyyy")
         const deleteButton = document.createElement("button");
