@@ -36,6 +36,10 @@ function todoForm(app, todoDiv, todoIndex) {
     dateField.value = format(todo.dueDate, "yyyy-MM-dd");
     const submit = document.createElement("button");
     submit.textContent = "Save";
+    submit.addEventListener("click", () => {
+        app.editTodo(currentProject, todoIndex, titleField.value, descriptionField.value, dateField.value);
+        updateDisplay(app);
+    });
 
     todoDiv.appendChild(titleField);
     todoDiv.appendChild(descriptionField);

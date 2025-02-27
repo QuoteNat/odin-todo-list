@@ -147,6 +147,10 @@ class App {
     deleteTodo(project, todo) {
         this.#projects[project].deleteTodo(todo);
     }
+
+    editTodo(project, todoIndex, title, description, date) {
+        this.#projects[project].editTodo(todoIndex, title, description, date, null);
+    }
 }
 
 export default App;
