@@ -124,10 +124,42 @@ function storageAvailable(type) {
 class App {
     #projects = [];
     constructor () {
-        let inbox = new Project("Inbox");
-        inbox.addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
-        this.#projects.push(inbox);
-        console.log(localStorage.getItem("projects"));
+        if (this.loadFromLocalStorage()) {
+            this.saveToLocalStorage();
+        } else {
+            let inbox = new Project("Inbox");
+            inbox.addTodo("Example todo", "This is an example of a todo!", new Date(), 0);
+            this.#projects.push(inbox);
+            console.log(localStorage.getItem("projects"));
+            this.saveToLocalStorage();
+        }
+    }
+
+    loadFromLocalStorage() {
+        // Only load from localStorage if it's available and something was saved there
+        if (storageAvailable("localStorage") && localStorage.getItem("projects") != null) {
+            let projects = JSON.parse(localStorage.getItem("projects"));
+            console.log(projects.length);
+            for (let i = 0; i < projects.length; i++) {
+                if (projects[i].name != undefined) {
+                    this.addProject(projects[i].name);
+                    // let currentProject = i;
+                    console.log(projects[i].todos);
+                    for (let j = 0; j < projects[i].todos.length; j++) {
+                        let todo = projects[i].todos[j];
+                        if (todo.date == null) {
+                            todo.date = new Date();
+                        }
+                        this.addTodo(i, todo.title, todo.description, todo.date);
+                    }
+                }
+            }
+            console.log(projects);
+            console.log(this.#projects.length)
+            return true;
+        } else {
+            return false;
+        }
     }
 
     saveToLocalStorage() {
@@ -180,7 +212,7 @@ class App {
      * @param {string} name Name of the new project
      */
     addProject(name) {
-        this.#projects.push(new Project(name)) - 1;
+        this.#projects.push(new Project(name));
         this.saveToLocalStorage();
     }
 
