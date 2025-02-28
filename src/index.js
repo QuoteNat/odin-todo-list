@@ -36,7 +36,7 @@ function todoForm(app, todoDiv, todoIndex) {
     const submit = document.createElement("button");
     submit.textContent = "Save";
     submit.addEventListener("click", () => {
-        app.editTodo(currentProject, todoIndex, titleField.value, descriptionField.value, dateField.value);
+        app.editTodo(currentProject, todoIndex, titleField.value, descriptionField.value, dateField.valueAsDate);
         updateDisplay(app);
     });
 

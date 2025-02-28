@@ -1,3 +1,5 @@
+import { parseJSON } from 'date-fns';
+
 /**
  * Class for creating TODO objects.
  */
@@ -147,10 +149,8 @@ class App {
                     console.log(projects[i].todos);
                     for (let j = 0; j < projects[i].todos.length; j++) {
                         let todo = projects[i].todos[j];
-                        if (todo.date == null) {
-                            todo.date = new Date();
-                        }
-                        this.addTodo(i, todo.title, todo.description, todo.date);
+                        console.log(todo.dueDate);
+                        this.addTodo(i, todo.title, todo.description, parseJSON(todo.dueDate));
                     }
                 }
             }
