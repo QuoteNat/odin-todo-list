@@ -1,6 +1,6 @@
 import App from "./app";
 import "./styles.css";
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 let currentProject = 0;
 
@@ -36,7 +36,7 @@ function todoForm(app, todoDiv, todoIndex) {
     const submit = document.createElement("button");
     submit.textContent = "Save";
     submit.addEventListener("click", () => {
-        app.editTodo(currentProject, todoIndex, titleField.value, descriptionField.value, dateField.valueAsDate);
+        app.editTodo(currentProject, todoIndex, titleField.value, descriptionField.value, parseISO(dateField.value));
         updateDisplay(app);
     });
 

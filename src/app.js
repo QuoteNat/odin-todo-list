@@ -214,6 +214,7 @@ class App {
     addProject(name) {
         this.#projects.push(new Project(name));
         this.saveToLocalStorage();
+        return this.#projects.length - 1;
     }
 
     deleteTodo(project, todo) {
