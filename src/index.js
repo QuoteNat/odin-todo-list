@@ -92,7 +92,7 @@ function updateDisplay(app) {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "X";
         deleteButton.addEventListener("click", () => {
-            app.deleteTodo(currentProject, j);
+            app.deleteTodo(currentProject, j-1);
             updateDisplay(app);
         });
 
